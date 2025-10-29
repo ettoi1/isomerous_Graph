@@ -1,0 +1,6 @@
+atlas: "Schaefer400-7net"
+index_csv: "data/subjects.csv"
+confounds:
+  bandpass: [0.01, 0.1]
+  regress: ["WM", "CSF", "motion"]
+  FD_thresh: 0.2
