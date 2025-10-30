@@ -9,46 +9,27 @@ the end-to-end workflow – from preprocessing to interpretability.
 
 ```
 project/
-  configs/            # YAML configuration files for dataset/model/train
-  data/               # Expected data caches (raw/interim/processed)
-  src/                # Python source tree organised by responsibility
-  scripts/            # Command-line entry points for the main stages
+  configs/
+  src/
+  scripts/
 ```
 
-Each subpackage under `src/` exposes a documented API that other modules can
-consume without tightly coupling to concrete implementations.
+The code inside `project/src` implements a minimal but functional pipeline for
+constructing edge features with a mixture-of-experts routing mechanism, running
+a multi-relation graph transformer, estimating communities and producing a
+classifier head.
 
-## Quick start
+## Smoke test
 
-1. Preprocess the dataset to extract ROI time-series:
+To verify that the model can execute end-to-end using random data, run:
 
-   ```bash
-   python scripts/preprocess_fmri.py --config configs/dataset.yaml
-   ```
+```bash
+python project/scripts/train.py
+```
 
-2. Build multi-view graph caches:
+This script instantiates `BrainGraphModel`, performs a single forward pass on a
+randomly generated batch and prints the aggregated losses to confirm that
+`BrainGraphModel.forward(batch)` produces both logits and auxiliary outputs.
 
-   ```bash
-   python scripts/build_graph_cache.py --dataset configs/dataset.yaml --model configs/model.yaml
-   ```
-
-3. Launch training:
-
-   ```bash
-   python scripts/train.py --dataset configs/dataset.yaml --model configs/model.yaml --train configs/train.yaml
-   ```
-
-4. Evaluate a trained checkpoint:
-
-   ```bash
-   python scripts/eval.py --ckpt path/to/checkpoint.ckpt --eval-config configs/train.yaml
-   ```
-
-## Development notes
-
-- Optional dependencies such as `nibabel` and `nilearn` are imported lazily so
-  unit tests can run with a light-weight environment.
-- The mixture-of-experts gate supports soft and top-k routing, exposing both the
-  fused edge weights and expert allocation probabilities for interpretability.
-- Structural encodings follow the Graphormer design and are implemented in
-  dedicated helper functions to ease experimentation.
+The remainder of the repository is organised to make it easy to replace the
+simplified components with production-grade implementations.
