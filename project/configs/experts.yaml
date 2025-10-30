@@ -1,3 +1,0 @@
-# Expert configuration defaults
-# top_k controls the number of candidate edges shared across experts.
-top_k: 200
