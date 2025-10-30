@@ -1,0 +1,6 @@
+# Placeholder model configuration
+model:
+  d_node_init: 16
+  d_model: 32
+  n_layers: 2
+  num_communities: 4

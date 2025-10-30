@@ -1,0 +1,8 @@
+# Placeholder training configuration
+training:
+  batch_size: 1
+  learning_rate: 0.001
+  loss_weights:
+    lambda_comm: 0.1
+    lambda_route_sparse: 0.1
+    lambda_route_balance: 0.1
