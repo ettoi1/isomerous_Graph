@@ -5,6 +5,17 @@ the fly, exercise图构建/超图/MoE等模块，并在几分钟内完成端到�
 """
 from __future__ import annotations
 
+# NOTE: Prefer running this module with ``python -m src.main_train`` from the
+# repository root so that ``src`` is resolved as a package. The block below
+# provides a fallback when executed directly (``python main_train.py``).
+if __package__ in {None, ""}:
+    import sys
+    from pathlib import Path
+
+    project_root = Path(__file__).resolve().parents[1]
+    if str(project_root) not in sys.path:
+        sys.path.append(str(project_root))
+
 import os
 from typing import List
 
