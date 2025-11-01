@@ -17,7 +17,12 @@ import os
 import pickle
 import random
 from dataclasses import dataclass
-from typing import Any, Iterable, Iterator, List, Optional, Sequence
+from typing import TYPE_CHECKING, Any, Iterable, Iterator, List, Optional, Sequence
+
+
+if TYPE_CHECKING:  # pragma: no cover - import resolved only for type checkers.
+    from torch.utils.data import DataLoader as TorchDataLoader  # noqa: F401
+    from torch.utils.data import Dataset as TorchDataset  # noqa: F401
 
 
 try:  # pragma: no cover - exercised only when the genuine dependency exists.
