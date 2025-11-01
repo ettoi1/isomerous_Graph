@@ -1,0 +1,3 @@
+# Placeholder dataset configuration
+name: toy_fmri
+num_regions: 30
